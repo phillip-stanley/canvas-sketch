@@ -1,0 +1,96 @@
+html,
+body {
+  font-family: 'sans-serif';
+}
+
+.header {
+  width: 100%;
+  min-height: 60px;
+  font-weight: bold;
+  background-color: #2c3e50;
+}
+
+.header h2 {
+  font-size: 24px;
+  color: #fff;
+  padding: 15px 15px;
+  text-transform: capitalize;
+}
+
+.wrapper {
+  padding-top: 50px;
+}
+
+.canvas-sketch {
+  width: 900px;
+  height: 550px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  border: 1px solid red;
+}
+
+.canvas-sketch__body {
+}
+
+.canvas-sketch__body__screen {
+  position: relative;
+  margin-top: 20px;
+  width: 860px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;  
+  border: 1px solid darkgrey;
+  margin-bottom: 20px;
+}
+
+#canvas-sketch-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.canvas-sketch__controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 90px;
+  border-radius: 10px;
+  border: 2px solid lightgreen;
+}
+
+.button {
+  padding-top: 25px;
+  border-radius: 10px;
+  border: 1px solid lightgreen;
+  text-align: center;
+}
+
+.button-horizontal,
+.button-vertical {
+  flex-basis: 15%;
+}
+
+.button-clear {
+  flex-basis: 50%;
+}
+
+.canvas-notice {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.canvas-notice p {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
