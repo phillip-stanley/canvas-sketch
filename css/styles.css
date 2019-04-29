@@ -1,8 +1,42 @@
+/* --------------------
+----------------------
+CANVAS SKETCH
+----------------------
+-------------------- */
+
+/* --------------------
+TABLE OF CONTENTS
+----------------------
+  $ SIZING $
+  $ HEADER $
+
+  $ CANVAS SKETCH $
+    $ CANVAS SKETCH: SCREEN $
+      $ CANVAS SKETCH: SCREEN  CANVAS $
+    $ CANVAS SKETCH: CONTROLS $
+      $ CANVAS SKETCH: BUTTON DIAL $
+      $ CANVAS SKETCH: BUTTON CLEAR $
+
+  $ NOTICE $
+-------------------- */
+/* --------------------
+$ BOX SIZING $
+-------------------- */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html,
 body {
   font-family: 'sans-serif';
 }
 
+/* --------------------
+$ HEADER $
+-------------------- */
 .header {
   width: 100%;
   min-height: 60px;
@@ -21,6 +55,9 @@ body {
   padding-top: 50px;
 }
 
+/* --------------------
+$ CANVAS SKETCH $
+-------------------- */
 .canvas-sketch {
   width: 900px;
   height: 550px;
@@ -29,11 +66,17 @@ body {
   margin-right: auto;
   margin-bottom: 50px;
   border: 1px solid red;
+  background: red;
+  background: linear-gradient(to bottom, #aa0000ff, 5%, #ff0000ff, 85%, #aa0000ff);
+  -webkit-box-shadow: 10px 10px 48px -5px rgba(0,0,0,0.75);
+     -moz-box-shadow: 10px 10px 48px -5px rgba(0,0,0,0.75);
+          box-shadow: 10px 10px 48px -5px rgba(0,0,0,0.75);
 }
 
-.canvas-sketch__body {
-}
 
+/* --------------------
+$ CANVAS SKETCH: SCREEN $
+-------------------- */
 .canvas-sketch__body__screen {
   position: relative;
   margin-top: 20px;
@@ -42,16 +85,28 @@ body {
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;  
-  border: 1px solid darkgrey;
+  border: 1px solid #aa0000ff;
   margin-bottom: 20px;
-}
+}  
 
+/* --------------------
+$ CANVAS SKETCH: SCREEN  CANVAS $
+-------------------- */
 #canvas-sketch-screen {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  background-color: #eee;
+
+  -webkit-box-shadow: inset 8px 9px 47px 0px rgba(0,0,0,0.65);
+     -moz-box-shadow: inset 8px 9px 47px 0px rgba(0,0,0,0.65);
+          box-shadow: inset 8px 9px 47px 0px rgba(0,0,0,0.65);
 }
 
+
+/* --------------------
+$ CANVAS SKETCH: CONTROLS $
+-------------------- */
 .canvas-sketch__controls {
   display: flex;
   justify-content: space-between;
@@ -61,14 +116,28 @@ body {
   margin-right: auto;
   min-height: 90px;
   border-radius: 10px;
-  border: 2px solid lightgreen;
 }
 
+
+/* --------------------
+$ CANVAS SKETCH: BUTTON $
+-------------------- */
 .button {
-  padding-top: 25px;
+  padding-top: 5px;
   border-radius: 10px;
-  border: 1px solid lightgreen;
   text-align: center;
+}
+
+
+/* --------------------
+$ CANVAS SKETCH: BUTTON DIAL $
+-------------------- */
+.button-horizontal .button__dial {
+  margin-left: 10px;
+}
+
+.button-vertical .button__dial {
+  margin-right: 10px;
 }
 
 .button-horizontal,
@@ -80,6 +149,105 @@ body {
   flex-basis: 50%;
 }
 
+.button__dial {
+  position: relative;
+  display: block;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+
+  -webkit-box-shadow: 2px 2px 28px 9px rgba(0,0,0,0.65);
+     -moz-box-shadow: 2px 2px 28px 9px rgba(0,0,0,0.65);
+          box-shadow: 2px 2px 28px 9px rgba(0,0,0,0.65);
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+69,efefef+100 */
+  background: rgb(255,255,255); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 69%, rgba(239,239,239,1) 100%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 69%,rgba(239,239,239,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, rgba(255,255,255,1) 69%,rgba(239,239,239,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            
+  background: black;
+  z-index: 1; 
+}
+
+.button__dial__cap {
+  background: #ccccccff;
+  border: 4px solid #fff;
+  display: block;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.button__dial__cap__highlight {
+  display: block;
+  width: 76px;
+  height: 76px;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.8), 60%, rgba(255, 255, 255, 0.4));
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin-left: -2px;
+  margin-top: -2px;
+}
+
+.button__dial::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-5px);
+  display: block;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  -webkit-box-shadow: inset 20px 13px 81px -19px rgba(0,0,0,0.75);
+     -moz-box-shadow: inset 20px 13px 81px -19px rgba(0,0,0,0.75);
+          box-shadow: inset 20px 13px 81px -19px rgba(0,0,0,0.75);
+  background: linear-gradient(to bottom right, rgb(180,180,180), rgb(0,0,0,0))
+}
+
+
+/* --------------------
+$ CANVAS SKETCH: BUTTON CLEAR $
+-------------------- */
+.button-clear {
+  position: relative;
+  display: block;
+  margin-top: 30px;
+  width: 200px;
+  height: 45px;
+
+  -webkit-box-shadow: 2px 2px 28px 9px rgba(0,0,0,0.65);
+     -moz-box-shadow: 2px 2px 28px 9px rgba(0,0,0,0.65);
+          box-shadow: 2px 2px 28px 9px rgba(0,0,0,0.65);
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+69,efefef+100 */
+  background: rgb(255,255,255); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 69%, rgba(239,239,239,1) 100%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 69%,rgba(239,239,239,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, rgba(255,255,255,1) 69%,rgba(239,239,239,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            
+  background: black;
+}
+
+.button-clear__cap {
+  background-color: #eee;
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+  height: 45px;
+  margin-top: -4px;
+}
+
+
+/* --------------------
+$ NOTICE $
+-------------------- */
 .canvas-notice {
   width: 100%;
   max-width: 900px;

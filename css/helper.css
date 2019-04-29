@@ -1,0 +1,10 @@
+.help-mouse-coords {
+  padding-top:15px;
+  background: lightgrey;
+  color: slateblue;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}

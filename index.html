@@ -5,24 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/vendor/reset.css">
-  <link rel="stylesheet" href="css/vendor/bootstrap.grid.css">
   <link rel="stylesheet" href="css/styles.css">
-  <title>canvas sketch - v0,1</title>
+  <link rel="stylesheet" href="css/helper.css">
+  <title>canvas sketch - v0.1</title>
 </head>
 <body>
 
   <!-- HEADER: STARTR -->
-
   <header class="header">
     <h2>canavs sketch demo</h2>
   </header>
-
   <!-- HEADER: END -->
 
   <div class='wrapper'>
 
     <!-- CANVAS SKETCH ELEMENT: START -->
-
     <div class="canvas-sketch">
       <div class="canvas-sketch__body">
         <div class="canvas-sketch__body__screen">
@@ -31,23 +28,46 @@
           </canvas>
         </div> 
       </div>
+      <!-- CANVAS SKETCH CONTROLS: START -->
       <div class="canvas-sketch__controls">
-
-        <span class="button button-horizontal">left/right</span>
-        <span class="button button-clear">clear</span>
-        <span class="button button-vertical">up/down</span>
-        
+        <span class="button button-horizontal">
+          <span data-dial="horizontal" class="button__dial">
+              <span class="button__dial__cap">
+                <span class="button__dial__cap__highlight"></span>
+              </span>
+          </span>
+        </span>
+        <span class="button button-clear">
+          <span data-dial="clear" class="button-clear__cap">
+            <span class="button-clear__cap">
+              <span class="button-clear__cap__highlight"></span>
+            </span>
+          </span>
+        </span>
+        <span class="button button-vertical">
+          <span data-dial="horizontal" class="button__dial">
+            <div class="button__dial__cap">
+              <div class="button__dial__cap__highlight"></div>
+            </div>
+          </span>
+        </span>
       </div>
-    </div>
+      <!-- CANVAS SKETCH CONTROLS: START -->
 
+    </div>
     <!-- CANVAS SKETCH ELEMENT: END -->
 
-    <!-- NOTICE: START-->
+    <!-- MOUSE COORDs PRE: START -->
+    <div class="help-mouse-coords">
+      <pre>
+      </pre>
+    </div>
+    <!-- MOUSE COORDs PRE: START -->
 
+    <!-- NOTICE: START-->
     <aside class="canvas-notice">
       <p>Canvas sketch demo arrows keys can be used to draw</p>
     </aside>
-
     <!-- NOTICE: END -->
 
   </div>
