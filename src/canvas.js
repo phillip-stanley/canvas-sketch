@@ -143,13 +143,27 @@ class CanvasSketch {
     }
   }
   /**
+   * @name clearCanvas
+   * @description reset canvas element
+   * @param {none}
+   */
+  resetCanvas() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.state.xPos = this.canvas.width / 2;
+    this.state.yPos = this.canvas.height / 2;
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.state.xPos, this.state.yPos);
+  }
+  /**
    * @name setupEvents   
    * @description setup eventlistenrs for canvas UI.
    * @param {none}
    */
   setupEvents() {
+    const clearBtn = document.querySelector('.button-clear');
     window.addEventListener('keydown', this.handleKeyPress.bind(this));
     window.addEventListener('keyup', this.handleKeyPress.bind(this));
+    clearBtn.addEventListener('click', this.resetCanvas.bind(this));
   }
   /**
    * @name debug
