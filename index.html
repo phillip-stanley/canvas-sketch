@@ -59,7 +59,7 @@
 
     <!-- MOUSE COORDs PRE: START -->
     <div class="help-mouse-coords">
-      <pre>
+      <pre id="debug-screen">
       </pre>
     </div>
     <!-- MOUSE COORDs PRE: START -->
@@ -72,5 +72,8 @@
 
   </div>
   <script type="text/javascript" src="dist/canvas.js"></script>
+  <script>
+    new CanvasSketch('canvas-sketch-screen', 'dev');
+  </script>
 </body>
 </html>
