@@ -16,7 +16,12 @@ class CanvasSketch {
       lineColor: '#111', // black
       keysPressed: [],
       drawing: false,
-      clearCanvas: false
+      clearCanvas: false,
+      fps: 30,
+      now: undefined,
+      then: Date.now(),
+      delta: undefined,
+      interval: (1000 / 30)
     }
 
     // Class properties
@@ -54,11 +59,11 @@ class CanvasSketch {
   /**
    * @name handleKeyPress
    * @description toggle drawing state on event type and update direction array.
-   * @param {Object} evt: event object 
+   * @param {Object} evt: event object
    */
   handleKeyPress(evt) {
     const { keyCode } = evt;
-    
+
     const keycodes = {
       37: 'left',
       38: 'up',
@@ -82,7 +87,9 @@ class CanvasSketch {
     }
 
     this.state.drawing = true;
-    requestAnimationFrame(this.render);
+    this.debug();
+    this.render();
+    evt.preventDefault();
   }
   /**
    * @name update
@@ -90,27 +97,27 @@ class CanvasSketch {
    * @param {none}
    */
   update() {
-    let newXPos = this.state.xPos;
-    let newYPos = this.state.yPos;
+    let deltaX = 0;
+    let deltaY = 0;
 
     if (this.state.keysPressed.includes('left') && this.state.xPos > 5) {
-      newXPos = this.state.xPos - this.state.lineSpeed;
+      deltaX -= this.state.lineSpeed;
     }
 
     if (this.state.keysPressed.includes('right') && this.state.xPos < (this.canvas.width - 5)) {
-      newXPos = this.state.xPos + this.state.lineSpeed;
+      deltaX += this.state.lineSpeed;
     }
 
     if (this.state.keysPressed.includes('up') && this.state.yPos > 5) {
-      newYPos = this.state.yPos - this.state.lineSpeed;
+      deltaY -= this.state.lineSpeed;
     }
 
     if (this.state.keysPressed.includes('down') && this.state.yPos < (this.canvas.height - 5)) {
-      newYPos = this.state.yPos + this.state.lineSpeed;
+      deltaY += this.state.lineSpeed;
     }
-    
-    this.state.xPos = newXPos;
-    this.state.yPos = newYPos;
+
+    this.state.xPos += deltaX;
+    this.state.yPos += deltaY;
   }
   /**
    * @name draw
@@ -129,18 +136,28 @@ class CanvasSketch {
   render() {
     const { drawing } = this.state;
 
-    // update state
-    this.update();
-
     // draw state to screen
-    this.draw();
-    
-    // Run debug if in dev
-    if(this.state.mode === 'dev') this.debug();
+    this.state.now = Date.now();
+    this.state.delta = (this.state.now - this.state.then);
 
-    if (this.state.drawing) {
-      requestAnimationFrame(this.render);
+    if (this.state.delta > this.state.interval) {
+
+      // update state
+      this.update();
+
+      this.state.then = this.state.now - (this.state.delta % this.state.interval);
+      this.draw();
+
+      // Run debug if in dev
+      if(this.state.mode === 'dev') this.debug();
+
+      if (this.state.drawing) {
+        requestAnimationFrame(this.render);
+      }
+
     }
+
+
   }
   /**
    * @name clearCanvas
@@ -155,7 +172,7 @@ class CanvasSketch {
     this.ctx.moveTo(this.state.xPos, this.state.yPos);
   }
   /**
-   * @name setupEvents   
+   * @name setupEvents
    * @description setup eventlistenrs for canvas UI.
    * @param {none}
    */
@@ -181,6 +198,11 @@ class CanvasSketch {
         keysPress: ${this.state.keysPressed}
         drawing: ${this.state.drawing}
         clearCanvas: ${this.state.clearCanvas}
+        FPS: ${this.state.fps}
+        NOW: ${this.state.now}
+        Then: ${this.state.then}
+        Delta: ${this.state.delta}
+        Interval: ${this.state.interval}
     `;
     this.display.innerHTML = content;
   }
