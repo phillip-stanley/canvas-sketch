@@ -181,6 +181,7 @@ $ CANVAS SKETCH: BUTTON DIAL $
   border-radius: 50%;
   width: 80px;
   height: 80px;
+  pointer-events: none;
 }
 
 .button__dial__cap__highlight {
@@ -192,6 +193,7 @@ $ CANVAS SKETCH: BUTTON DIAL $
   border-radius: 50%;
   margin-left: -2px;
   margin-top: -2px;
+  pointer-events: none;
 }
 
 .button__dial::before {
@@ -204,6 +206,7 @@ $ CANVAS SKETCH: BUTTON DIAL $
   border-radius: 50%;
   width: 10px;
   height: 10px;
+  pointer-events: none;
   -webkit-box-shadow: inset 20px 13px 81px -19px rgba(0,0,0,0.75);
      -moz-box-shadow: inset 20px 13px 81px -19px rgba(0,0,0,0.75);
           box-shadow: inset 20px 13px 81px -19px rgba(0,0,0,0.75);

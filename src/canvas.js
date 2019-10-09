@@ -1,5 +1,15 @@
 'use strict';
 
+const PI = Math.PI;
+
+// Mouse controls
+  // set active dial on mouse down.
+    // horizontal or vertical
+    // while active
+    // set direction
+    // update delta x and y
+    // draw to canvas
+
 class CanvasSketch {
   constructor(
     canvasElement = undefined,
@@ -21,7 +31,14 @@ class CanvasSketch {
       now: undefined,
       then: Date.now(),
       delta: undefined,
-      interval: (1000 / 30)
+      interval: (1000 / 30),
+      activeDial: undefined,
+      mouseX: undefined,
+      mouseY: undefined,
+      mouseDeltaX: undefined,
+      mouseDeltaY: undefined,
+      mouseDirection: undefined,
+      degrees: 0
     }
 
     // Class properties
@@ -55,6 +72,66 @@ class CanvasSketch {
     this.ctx.beginPath();
     this.ctx.moveTo(this.state.xPos, this.state.yPos);
     this.debug();
+  }
+  /**
+   * @name handleMousedown
+   * @description sets the active dial from the mouse event object
+   * @param {Object} evt: event object
+   */
+  handleMousedown(evt) {
+    const { dial } = evt.target.dataset;
+    if (dial === 'horizontal' || dial === 'vertical') {
+      this.state.activeDial = dial;
+      this.state.mouseX = evt.pageX;
+      this.state.mouseY = evt.pageY;
+    }
+    if (evt.type === 'mouseup') {
+      this.state.activeDial = undefined;
+    }
+    this.debug();
+  }
+  /**
+   * @name handleMousemove
+   * @description takes mouse x and y position
+   * @param {object} evt : Event object
+   */
+  handleMousemove(evt) {
+    setTimeout(() => {
+      if (this.state.activeDial === undefined) return;
+      this.state.mouseDeltaX = Math.abs(evt.pageX - this.state.mouseX);
+      this.state.mouseDeltaY = Math.abs(evt.pageY - this.state.mouseY);
+      const distance = Math.atan(
+        this.state.mouseDeltaX, this.state.mouseDeltaX,
+        this.state.mouseDeltaY, this.state.mouseDeltaY
+      );
+      console.log('---- distance ----', distance)
+      if (evt.pageX > this.state.mouseX) {
+        this.state.mouseDirection = 'right';
+      }
+      if (evt.pageX < this.state.mouseX) {
+        this.state.mouseDirection = 'left';
+      }
+      const degrees = distance * (180/Math.PI);
+      this.rotateDial(parseInt(degrees, 10));
+    }, 500)
+  }
+  /**
+   * @name rotateDial
+   * @Description rotate the active dial based on the distance of mouse movement.
+   * @param {integer} degrees
+   */
+  rotateDial(degrees) {
+    const dials = [].slice.call(document.getElementsByClassName('button__dial'));
+    console.log('---- degrees ---', degrees);
+    dials.forEach(dial => {
+      if(dial.dataset.dial === this.state.activeDial) {
+        if (this.mouseDirection === 'left') {
+          dial.style.transform = `rotate(-${(this.state.degrees + degrees)}deg)`
+        }
+        dial.style.transform = `rotate(${(this.state.degrees + degrees)}deg)`
+      }
+      this.state.degrees = degrees;
+    });
   }
   /**
    * @name handleKeyPress
@@ -154,10 +231,7 @@ class CanvasSketch {
       if (this.state.drawing) {
         requestAnimationFrame(this.render);
       }
-
     }
-
-
   }
   /**
    * @name clearCanvas
@@ -178,9 +252,20 @@ class CanvasSketch {
    */
   setupEvents() {
     const clearBtn = document.querySelector('.button-clear');
+    const leftDial = document.querySelector('#left-dial');
+    const rightDial = document.querySelector('#right-dial');
+
+    // mouse controls
+    clearBtn.addEventListener('click', this.resetCanvas.bind(this));
+    leftDial.addEventListener('mousedown', this.handleMousedown.bind(this));
+    rightDial.addEventListener('mousedown', this.handleMousedown.bind(this));
+    window.addEventListener('mouseup', this.handleMousedown.bind(this));
+    window.addEventListener('mouseup', this.handleMousedown.bind(this));
+    window.addEventListener('mousemove', this.handleMousemove.bind(this));
+
+    // key controls
     window.addEventListener('keydown', this.handleKeyPress.bind(this));
     window.addEventListener('keyup', this.handleKeyPress.bind(this));
-    clearBtn.addEventListener('click', this.resetCanvas.bind(this));
   }
   /**
    * @name debug
@@ -203,6 +288,8 @@ class CanvasSketch {
         Then: ${this.state.then}
         Delta: ${this.state.delta}
         Interval: ${this.state.interval}
+        ActiveDIal: ${this.state.activeDial}
+        Mouse Direction: ${this.state.mouseDirection}
     `;
     this.display.innerHTML = content;
   }
