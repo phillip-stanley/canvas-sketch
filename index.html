@@ -71,9 +71,12 @@
     <!-- NOTICE: END -->
 
   </div>
-  <script type="text/javascript" src="dist/canvas.js"></script>
+  <script src="dist/index.js"></script>
   <script>
-    new CanvasSketch('canvas-sketch-screen', 'dev');
+    const canvasSketch = new window.CanvasApp({
+      canvasElement: 'canvas-sketch-screen',
+      clearBtn: '.button-clear'
+    });
   </script>
 </body>
 </html>

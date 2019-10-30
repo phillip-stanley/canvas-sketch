@@ -7,13 +7,30 @@
     "dev": "concurrently \"npm run serve\" \"npm run transpile\"",
     "build": "rm -rf dist && babel src -d dist",
     "serve": "./node_modules/.bin/http-server -p 8080 -o -c-1",
-    "transpile": "./node_modules/.bin/babel src -wd dist"
+    "transpile": "./node_modules/.bin/babel src -wd dist",
+    "webpack": "webpack",
+    "dev:server": "webpack-dev-server",
+    "test": "jest --watch"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.6",
     "concurrently": "^4.1.0",
-    "http-server": "^0.11.1"
+    "css-loader": "^3.2.0",
+    "http-server": "^0.11.1",
+    "jest": "^24.9.0",
+    "jest-canvas-mock": "^2.1.2",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
+  "dependencies": {
+    "core-js": "^3.3.2"
+  },
+  "jest": {
+    "setupFiles": ["jest-canvas-mock"]
   }
 }
